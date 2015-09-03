@@ -3,7 +3,7 @@
 namespace Sanitize_And_Escape_Me;
 
 class Results {
-	public function output_form(){
+	public function output_form() {
 		?> 
  		<form method="post" action="save_contact_info">
 			<table>
@@ -35,7 +35,7 @@ class Results {
  		</form> 
  		<?php 
 	}
-	public function output_results(){
+	public function output_results() {
 		?> 
  		<b>Your information has been received. Thank you.</b> 
  		<br /> 
@@ -49,7 +49,7 @@ class Results {
  		<br />  
 	<?php 
 	}
-	public function save_results(){
+	public function save_results() {
 		$form_name    = sanitize_text_field( $_POST['name'] ); 
  		$form_email   = sanitize_text_field( $_POST['email'] ); 
  		$form_website = sanitize_text_field( $_POST['website'] ); 
@@ -57,6 +57,11 @@ class Results {
  		update_option( 'form_contact_name', $form_name ); 
  		update_option( 'form_contact_email', $form_email ); 
  		update_option( 'form_contact_website', $form_website ); 
+	}
+	public function check_submission() {
+		if ( isset( $_POST['name'] ) && isset( $_POST['email'] ) && isset( $_POST['website'] ) ) {
+			output_results();
+		}
 	}
 }
 
